@@ -20,4 +20,3 @@ class FreqStack:
         if not self.group[self.max_freq]:
             self.max_freq -= 1
         return val
-cat Maximum-Frequency-Stack/solution.
