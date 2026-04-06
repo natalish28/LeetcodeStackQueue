@@ -47,5 +47,3 @@ class MyQueue:
 
     def empty(self) -> bool:
         return self.stack_in.is_empty() and self.stack_out.is_empty()
-cd ~/LeetcodeStackQueue
-ls
