@@ -1,44 +1,39 @@
-from collections import deque
+class Node:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 class Queue:
     def __init__(self):
-        self._data = deque()
-
+        self.head = self.tail = None
     def push(self, x):
-        self._data.append(x)
-
+        new_node = Node(x)
+        if not self.tail: self.head = self.tail = new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
     def pop(self):
-        return self._data.popleft()
-
+        res = self.head.val
+        self.head = self.head.next
+        if not self.head: self.tail = None
+        return res
     def peek(self):
-        val = self._data.popleft()
-        self._data.append(val)
-        return val
-
+        return self.head.val
     def is_empty(self):
-        return len(self._data) == 0
-
-    def size(self):
-        return len(self._data)
-
+        return self.head is None
 
 class MyStack:
-
     def __init__(self):
-        self.queue1 = Queue()
-        self.queue2 = Queue()
-
+        self.q1 = Queue()
+        self.q2 = Queue()
     def push(self, x: int) -> None:
-        self.queue2.push(x)
-        while not self.queue1.is_empty():
-            self.queue2.push(self.queue1.pop())
-        self.queue1, self.queue2 = self.queue2, self.queue1
-
+        self.q2.push(x)
+        while not self.q1.is_empty():
+            self.q2.push(self.q1.pop())
+        self.q1, self.q2 = self.q2, self.q1
     def pop(self) -> int:
-        return self.queue1.pop()
-
+        return self.q1.pop()
     def top(self) -> int:
-        return self.queue1.peek()
-
+        return self.q1.peek()
     def empty(self) -> bool:
-        return self.queue1.is_empty()
+        return self.q1.is_empty()
